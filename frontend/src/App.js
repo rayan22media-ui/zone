@@ -1309,13 +1309,13 @@ const HomePage = () => {
           {loading ? (
             <div className="flex gap-3 overflow-x-auto pb-4 px-4 scrollbar-hide">
               {[...Array(4)].map((_, i) => (
-                <Skeleton key={i} className="min-w-[200px] h-64 rounded-2xl flex-shrink-0" />
+                <Skeleton key={i} className="min-w-[160px] h-56 rounded-2xl flex-shrink-0" />
               ))}
             </div>
           ) : (
             <div className="flex gap-3 overflow-x-auto pb-4 px-4 scrollbar-hide snap-x snap-mandatory">
               {(trendingOffers.length > 0 ? trendingOffers : offers.slice(0, 6)).map((offer, idx) => (
-                <div key={offer.id} className="min-w-[180px] flex-shrink-0 snap-start">
+                <div key={offer.id} className="w-[160px] flex-shrink-0 snap-start">
                   <OfferCard offer={offer} delay={idx * 0.05} />
                 </div>
               ))}
@@ -1338,13 +1338,13 @@ const HomePage = () => {
           {loading ? (
             <div className="flex gap-3 overflow-x-auto pb-4 px-4 scrollbar-hide">
               {[...Array(4)].map((_, i) => (
-                <Skeleton key={i} className="min-w-[200px] h-64 rounded-2xl flex-shrink-0" />
+                <Skeleton key={i} className="min-w-[160px] h-56 rounded-2xl flex-shrink-0" />
               ))}
             </div>
           ) : (
             <div className="flex gap-3 overflow-x-auto pb-4 px-4 scrollbar-hide snap-x snap-mandatory">
               {offers.slice(0, 6).map((offer, idx) => (
-                <div key={offer.id} className="min-w-[180px] flex-shrink-0 snap-start">
+                <div key={offer.id} className="w-[160px] flex-shrink-0 snap-start">
                   <OfferCard offer={offer} delay={idx * 0.05} />
                 </div>
               ))}
