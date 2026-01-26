@@ -1295,8 +1295,8 @@ const HomePage = () => {
         </div>
 
         {/* Trending Offers - عليها العين 👁️ */}
-        <div className="pt-6 px-4">
-          <div className="flex items-center justify-between mb-4">
+        <div className="pt-6">
+          <div className="flex items-center justify-between mb-4 px-4">
             <h3 className="text-base font-bold text-gray-900 flex items-center gap-2">
               <Eye className="w-4 h-4 text-purple-500" />
               عليها العين
@@ -1307,29 +1307,25 @@ const HomePage = () => {
             </Link>
           </div>
           {loading ? (
-            <div className="grid grid-cols-2 gap-3">
+            <div className="flex gap-3 overflow-x-auto pb-4 px-4 scrollbar-hide">
               {[...Array(4)].map((_, i) => (
-                <Skeleton key={i} className="h-56 rounded-2xl" />
-              ))}
-            </div>
-          ) : trendingOffers.length > 0 ? (
-            <div className="grid grid-cols-2 gap-3">
-              {trendingOffers.map((offer, idx) => (
-                <OfferCard key={offer.id} offer={offer} delay={idx * 0.05} />
+                <Skeleton key={i} className="min-w-[200px] h-64 rounded-2xl flex-shrink-0" />
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-3">
-              {offers.slice(0, 4).map((offer, idx) => (
-                <OfferCard key={offer.id} offer={offer} delay={idx * 0.05} />
+            <div className="flex gap-3 overflow-x-auto pb-4 px-4 scrollbar-hide snap-x snap-mandatory">
+              {(trendingOffers.length > 0 ? trendingOffers : offers.slice(0, 6)).map((offer, idx) => (
+                <div key={offer.id} className="min-w-[180px] flex-shrink-0 snap-start">
+                  <OfferCard offer={offer} delay={idx * 0.05} />
+                </div>
               ))}
             </div>
           )}
         </div>
 
         {/* Latest Offers - أحدث العروض */}
-        <div className="pt-6 px-4">
-          <div className="flex items-center justify-between mb-4">
+        <div className="pt-6">
+          <div className="flex items-center justify-between mb-4 px-4">
             <h3 className="text-base font-bold text-gray-900 flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-pink-500" />
               أحدث العروض
@@ -1340,15 +1336,17 @@ const HomePage = () => {
             </Link>
           </div>
           {loading ? (
-            <div className="grid grid-cols-2 gap-3">
+            <div className="flex gap-3 overflow-x-auto pb-4 px-4 scrollbar-hide">
               {[...Array(4)].map((_, i) => (
-                <Skeleton key={i} className="h-56 rounded-2xl" />
+                <Skeleton key={i} className="min-w-[200px] h-64 rounded-2xl flex-shrink-0" />
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-3">
-              {offers.slice(0, 4).map((offer, idx) => (
-                <OfferCard key={offer.id} offer={offer} delay={idx * 0.05} />
+            <div className="flex gap-3 overflow-x-auto pb-4 px-4 scrollbar-hide snap-x snap-mandatory">
+              {offers.slice(0, 6).map((offer, idx) => (
+                <div key={offer.id} className="min-w-[180px] flex-shrink-0 snap-start">
+                  <OfferCard offer={offer} delay={idx * 0.05} />
+                </div>
               ))}
             </div>
           )}
