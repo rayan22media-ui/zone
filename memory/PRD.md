@@ -93,6 +93,17 @@
 
 ---
 
+## Latest Update (December 2025):
+- Simplified OfferCard design by removing:
+  - Timestamp/time display
+  - Owner name
+  - "Wanted in exchange" section
+- Card now shows only: Image, Category, Location, Title, and Description
+
+**Completed work in this session**
+
+---
+
 ## ملاحظات تقنية
 
 ### نقاط نهاية WhatsApp:
