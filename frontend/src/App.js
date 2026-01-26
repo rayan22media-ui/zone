@@ -4492,25 +4492,36 @@ const AdminBlog = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold">إدارة المدونة</h2>
-        <Button onClick={() => setShowDialog(true)} className="rounded-xl"><PlusCircle className="w-4 h-4 ml-2" />مقالة جديدة</Button>
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
+        <h2 className="text-lg md:text-xl font-bold">إدارة المدونة</h2>
+        <Button onClick={() => setShowDialog(true)} className="rounded-xl w-full sm:w-auto">
+          <PlusCircle className="w-4 h-4 ml-2" />مقالة جديدة
+        </Button>
       </div>
       
-      <GlassCard hover={false}>
+      <GlassCard hover={false} className="p-3 md:p-6">
         {posts.length === 0 ? (
-          <div className="text-center py-12"><BookOpen className="w-16 h-16 mx-auto mb-4 text-muted-foreground" /><p>لا توجد مقالات</p></div>
+          <div className="text-center py-12">
+            <BookOpen className="w-16 h-16 mx-auto mb-4 text-muted-foreground opacity-50" />
+            <p className="text-gray-500">لا توجد مقالات</p>
+            <p className="text-sm text-gray-400 mt-1">أنشئ مقالتك الأولى الآن</p>
+          </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-3">
             {posts.map((post) => (
-              <div key={post.id} className="flex items-center justify-between p-4 border border-purple-100 rounded-xl">
-                <div>
-                  <h3 className="font-bold">{post.title}</h3>
+              <div key={post.id} className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-white border border-purple-100 rounded-xl shadow-sm">
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-gray-900 truncate">{post.title}</h3>
                   <p className="text-sm text-muted-foreground">{new Date(post.created_at).toLocaleDateString("ar-SY")}</p>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Badge className={post.is_published ? "bg-green-500" : "bg-gray-500"}>{post.is_published ? "منشور" : "مسودة"}</Badge>
-                  <Button variant="ghost" size="sm" onClick={() => deletePost(post.id)}><Trash2 className="w-4 h-4 text-destructive" /></Button>
+                <div className="flex items-center justify-between sm:justify-end gap-2">
+                  <Badge className={`${post.is_published ? "bg-green-500" : "bg-gray-400"} text-xs`}>
+                    {post.is_published ? "منشور" : "مسودة"}
+                  </Badge>
+                  <Button variant="ghost" size="sm" onClick={() => deletePost(post.id)} className="text-red-500 hover:text-red-600 hover:bg-red-50">
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
                 </div>
               </div>
             ))}
