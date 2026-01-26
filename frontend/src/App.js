@@ -899,31 +899,31 @@ const OfferCard = ({ offer, delay = 0, showActions = false, onStatusChange, onDe
           
           {/* Actions for My Offers */}
           {showActions && (
-            <div className="flex gap-2 mt-4 pt-3 border-t border-gray-100">
+            <div className="flex flex-wrap gap-2 mt-auto pt-3 border-t border-gray-100">
               <Button 
                 size="sm" 
                 variant="outline" 
-                className="flex-1 rounded-xl text-xs h-9"
+                className="flex-1 min-w-[60px] rounded-xl text-[10px] md:text-xs h-8 md:h-9 px-2 md:px-3"
                 onClick={(e) => { e.stopPropagation(); navigate(`/edit-offer/${offer.id}`); }}
               >
-                <Edit className="w-3.5 h-3.5 ml-1" />
+                <Edit className="w-3 h-3 md:w-3.5 md:h-3.5 ml-1" />
                 تعديل
               </Button>
               {offer.status === "active" ? (
                 <Button 
                   size="sm" 
                   variant="outline" 
-                  className="flex-1 rounded-xl text-xs h-9 text-green-600 border-green-200 hover:bg-green-50"
+                  className="flex-1 min-w-[50px] rounded-xl text-[10px] md:text-xs h-8 md:h-9 px-2 md:px-3 text-green-600 border-green-200 hover:bg-green-50"
                   onClick={(e) => { e.stopPropagation(); onStatusChange?.(offer.id, "completed"); }}
                 >
-                  <Check className="w-3.5 h-3.5 ml-1" />
+                  <Check className="w-3 h-3 md:w-3.5 md:h-3.5 ml-1" />
                   تم
                 </Button>
               ) : (
                 <Button 
                   size="sm" 
                   variant="outline" 
-                  className="flex-1 rounded-xl text-xs h-9"
+                  className="flex-1 min-w-[50px] rounded-xl text-[10px] md:text-xs h-8 md:h-9 px-2 md:px-3"
                   onClick={(e) => { e.stopPropagation(); onStatusChange?.(offer.id, "active"); }}
                 >
                   تفعيل
@@ -932,10 +932,10 @@ const OfferCard = ({ offer, delay = 0, showActions = false, onStatusChange, onDe
               <Button 
                 size="sm" 
                 variant="outline" 
-                className="rounded-xl text-xs h-9 text-red-500 border-red-200 hover:bg-red-50 px-3"
+                className="rounded-xl text-[10px] md:text-xs h-8 md:h-9 text-red-500 border-red-200 hover:bg-red-50 px-2 md:px-3"
                 onClick={(e) => { e.stopPropagation(); onDelete?.(offer.id); }}
               >
-                <Trash2 className="w-3.5 h-3.5" />
+                <Trash2 className="w-3 h-3 md:w-3.5 md:h-3.5" />
               </Button>
             </div>
           )}
