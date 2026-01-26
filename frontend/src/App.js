@@ -4078,22 +4078,59 @@ const AdminDashboard = () => {
 
   if (loading) return <div className="min-h-screen flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>;
 
+  // قائمة التبويبات للجوال
+  const adminTabs = [
+    { value: "overview", label: "نظرة عامة", icon: TrendingUp },
+    { value: "users", label: "المستخدمون", icon: Users },
+    { value: "offers", label: "العروض", icon: Package },
+    { value: "reports", label: "البلاغات", icon: AlertTriangle },
+    { value: "blog", label: "المدونة", icon: BookOpen },
+    { value: "pages", label: "الصفحات", icon: Layers },
+    { value: "whatsapp", label: "WhatsApp", icon: MessageCircle },
+    { value: "settings", label: "الإعدادات", icon: Settings },
+  ];
+
   return (
-    <div className="min-h-screen pb-24 md:pb-8 px-4 pt-2 md:py-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">لوحة التحكم</h1>
+    <div className="min-h-screen pb-24 md:pb-8">
+      {/* Mobile Header */}
+      <div className="md:hidden sticky top-0 z-40 bg-gradient-to-r from-purple-600 to-pink-500 text-white px-4 py-4 shadow-lg">
+        <h1 className="text-xl font-bold">لوحة التحكم</h1>
+        <p className="text-sm text-purple-100 mt-1">مرحباً بك في لوحة الإدارة</p>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 pt-4 md:py-8">
+        {/* Desktop Title */}
+        <h1 className="hidden md:block text-3xl font-bold mb-8">لوحة التحكم</h1>
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="mb-8 bg-white/80 p-1 rounded-full flex-wrap gap-1">
-            <TabsTrigger value="overview" className="rounded-full"><TrendingUp className="w-4 h-4 ml-2" />نظرة عامة</TabsTrigger>
-            <TabsTrigger value="users" className="rounded-full"><Users className="w-4 h-4 ml-2" />المستخدمون</TabsTrigger>
-            <TabsTrigger value="offers" className="rounded-full"><Package className="w-4 h-4 ml-2" />العروض</TabsTrigger>
-            <TabsTrigger value="reports" className="rounded-full"><AlertTriangle className="w-4 h-4 ml-2" />البلاغات</TabsTrigger>
-            <TabsTrigger value="blog" className="rounded-full"><BookOpen className="w-4 h-4 ml-2" />المدونة</TabsTrigger>
-            <TabsTrigger value="pages" className="rounded-full"><Layers className="w-4 h-4 ml-2" />الصفحات</TabsTrigger>
-            <TabsTrigger value="whatsapp" className="rounded-full"><MessageCircle className="w-4 h-4 ml-2" />WhatsApp</TabsTrigger>
-            <TabsTrigger value="settings" className="rounded-full"><Settings className="w-4 h-4 ml-2" />الإعدادات</TabsTrigger>
+          {/* Desktop Tabs */}
+          <TabsList className="hidden md:flex mb-8 bg-white/80 p-1 rounded-full flex-wrap gap-1">
+            {adminTabs.map((tab) => (
+              <TabsTrigger key={tab.value} value={tab.value} className="rounded-full">
+                <tab.icon className="w-4 h-4 ml-2" />{tab.label}
+              </TabsTrigger>
+            ))}
           </TabsList>
+
+          {/* Mobile Tabs - Horizontal Scrollable */}
+          <div className="md:hidden mb-4 -mx-4 px-4">
+            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+              {adminTabs.map((tab) => (
+                <button
+                  key={tab.value}
+                  onClick={() => setActiveTab(tab.value)}
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl whitespace-nowrap text-sm font-medium transition-all flex-shrink-0 ${
+                    activeTab === tab.value
+                      ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg"
+                      : "bg-white text-gray-600 border border-gray-200 hover:border-purple-300"
+                  }`}
+                >
+                  <tab.icon className="w-4 h-4" />
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
 
           <TabsContent value="overview"><AdminOverview stats={stats} /></TabsContent>
           <TabsContent value="users"><AdminUsers /></TabsContent>
