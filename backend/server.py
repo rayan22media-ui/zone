@@ -36,6 +36,11 @@ security = HTTPBearer()
 app = FastAPI()
 api_router = APIRouter(prefix="/api")
 
+# Root health check endpoint for deployment
+@app.get("/health")
+async def root_health_check():
+    return {"status": "healthy", "service": "backend"}
+
 # Syrian Governorates
 SYRIAN_GOVERNORATES = [
     "دمشق", "ريف دمشق", "حلب", "حمص", "حماة", "اللاذقية", "طرطوس",
