@@ -4649,27 +4649,44 @@ const AdminPages = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold">بناء الصفحات</h2>
-        <Button onClick={() => setShowDialog(true)} className="rounded-xl"><PlusCircle className="w-4 h-4 ml-2" />صفحة جديدة</Button>
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
+        <h2 className="text-lg md:text-xl font-bold">بناء الصفحات</h2>
+        <Button onClick={() => setShowDialog(true)} className="rounded-xl w-full sm:w-auto">
+          <PlusCircle className="w-4 h-4 ml-2" />صفحة جديدة
+        </Button>
       </div>
       
-      <GlassCard hover={false}>
+      <GlassCard hover={false} className="p-3 md:p-6">
         {pages.length === 0 ? (
-          <div className="text-center py-12"><Layers className="w-16 h-16 mx-auto mb-4 text-muted-foreground" /><p>لا توجد صفحات مخصصة</p></div>
+          <div className="text-center py-12">
+            <Layers className="w-16 h-16 mx-auto mb-4 text-muted-foreground opacity-50" />
+            <p className="text-gray-500">لا توجد صفحات مخصصة</p>
+            <p className="text-sm text-gray-400 mt-1">أنشئ صفحتك الأولى الآن</p>
+          </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-3">
             {pages.map((page) => (
-              <div key={page.id} className="flex items-center justify-between p-4 border border-purple-100 rounded-xl">
-                <div>
-                  <h3 className="font-bold">{page.title}</h3>
+              <div key={page.id} className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-white border border-purple-100 rounded-xl shadow-sm">
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-gray-900 truncate">{page.title}</h3>
                   <p className="text-sm text-muted-foreground">/{page.slug} • {page.blocks?.length || 0} مكونات</p>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Badge className={page.is_published ? "bg-green-500" : "bg-gray-500"}>{page.is_published ? "منشور" : "مسودة"}</Badge>
-                  <Button variant="outline" size="sm" onClick={() => window.open(`/page/${page.slug}`, '_blank')} className="rounded-xl"><ExternalLink className="w-4 h-4" /></Button>
-                  <Button variant="outline" size="sm" onClick={() => openEditPage(page)} className="rounded-xl"><Edit className="w-4 h-4" /></Button>
-                  <Button variant="ghost" size="sm" onClick={() => deletePage(page.id)}><Trash2 className="w-4 h-4 text-destructive" /></Button>
+                <div className="flex items-center justify-between sm:justify-end gap-2 flex-wrap">
+                  <Badge className={`${page.is_published ? "bg-green-500" : "bg-gray-400"} text-xs`}>
+                    {page.is_published ? "منشور" : "مسودة"}
+                  </Badge>
+                  <div className="flex items-center gap-1">
+                    <Button variant="outline" size="sm" onClick={() => window.open(`/page/${page.slug}`, '_blank')} className="rounded-lg h-8 w-8 p-0">
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={() => openEditPage(page)} className="rounded-lg h-8 w-8 p-0">
+                      <Edit className="w-3.5 h-3.5" />
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={() => deletePage(page.id)} className="rounded-lg h-8 w-8 p-0 text-red-500 hover:text-red-600 hover:bg-red-50">
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </Button>
+                  </div>
                 </div>
               </div>
             ))}
