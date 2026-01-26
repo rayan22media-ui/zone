@@ -5,11 +5,13 @@ WhatsApp Service Client
 
 import httpx
 import logging
+import os
 from typing import Optional, Dict
 
 logger = logging.getLogger(__name__)
 
-WHATSAPP_SERVICE_URL = "http://localhost:8002"
+# استخدام متغير البيئة أو القيمة الافتراضية
+WHATSAPP_SERVICE_URL = os.environ.get("WHATSAPP_SERVICE_URL", "http://localhost:8002")
 
 class WhatsAppServiceClient:
     """
