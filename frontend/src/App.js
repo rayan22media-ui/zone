@@ -1675,25 +1675,6 @@ const HomePage = () => {
           )}
         </div>
       </section>
-              <ArrowLeft className="w-4 h-4" />
-            </Link>
-          </div>
-
-          {loading ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {[...Array(4)].map((_, i) => (
-                <Skeleton key={i} className="h-72 rounded-3xl" />
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {offers.slice(0, 4).map((offer, idx) => (
-                <OfferCard key={offer.id} offer={offer} delay={idx * 0.1} />
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-10 md:py-20 bg-gradient-to-br from-purple-600 via-purple-500 to-pink-500 hidden md:block">
