@@ -1303,9 +1303,10 @@ async def test_send_message(phone: str, message: str = None, user=Depends(get_ad
     try:
         import httpx
         
+        whatsapp_url = os.environ.get('WHATSAPP_SERVICE_URL', 'http://localhost:8002')
         async with httpx.AsyncClient(timeout=30.0) as client:
             response = await client.post(
-                "http://localhost:8002/test-send",
+                f"{whatsapp_url}/test-send",
                 json={"phone": phone, "message": message}
             )
             data = response.json()
