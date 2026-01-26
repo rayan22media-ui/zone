@@ -1598,8 +1598,8 @@ const HomePage = () => {
 
       {/* Trending Offers Section - عليها العين - Desktop */}
       <section className="py-12 bg-gray-50 hidden md:block">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-between items-center mb-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-center mb-8 px-4">
             <div>
               <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
                 <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
@@ -1619,21 +1619,17 @@ const HomePage = () => {
           </div>
 
           {loading ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {[...Array(4)].map((_, i) => (
-                <Skeleton key={i} className="h-72 rounded-3xl" />
-              ))}
-            </div>
-          ) : trendingOffers.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {trendingOffers.map((offer, idx) => (
-                <OfferCard key={offer.id} offer={offer} delay={idx * 0.1} />
+            <div className="flex gap-5 overflow-x-auto pb-4 px-4 scrollbar-hide">
+              {[...Array(6)].map((_, i) => (
+                <Skeleton key={i} className="min-w-[280px] h-80 rounded-3xl flex-shrink-0" />
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {offers.slice(0, 4).map((offer, idx) => (
-                <OfferCard key={offer.id} offer={offer} delay={idx * 0.1} />
+            <div className="flex gap-5 overflow-x-auto pb-4 px-4 scrollbar-hide snap-x snap-mandatory">
+              {(trendingOffers.length > 0 ? trendingOffers : offers).slice(0, 8).map((offer, idx) => (
+                <div key={offer.id} className="min-w-[280px] flex-shrink-0 snap-start">
+                  <OfferCard offer={offer} delay={idx * 0.05} />
+                </div>
               ))}
             </div>
           )}
@@ -1642,8 +1638,8 @@ const HomePage = () => {
 
       {/* Latest Offers Section - أحدث العروض - Desktop */}
       <section className="py-12 bg-white hidden md:block">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-between items-center mb-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-center mb-8 px-4">
             <div>
               <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
                 <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-500 rounded-xl flex items-center justify-center">
@@ -1658,6 +1654,27 @@ const HomePage = () => {
               className="text-purple-600 font-medium flex items-center gap-2 hover:gap-3 transition-all"
             >
               عرض الكل
+              <ArrowLeft className="w-4 h-4" />
+            </Link>
+          </div>
+
+          {loading ? (
+            <div className="flex gap-5 overflow-x-auto pb-4 px-4 scrollbar-hide">
+              {[...Array(6)].map((_, i) => (
+                <Skeleton key={i} className="min-w-[280px] h-80 rounded-3xl flex-shrink-0" />
+              ))}
+            </div>
+          ) : (
+            <div className="flex gap-5 overflow-x-auto pb-4 px-4 scrollbar-hide snap-x snap-mandatory">
+              {offers.slice(0, 8).map((offer, idx) => (
+                <div key={offer.id} className="min-w-[280px] flex-shrink-0 snap-start">
+                  <OfferCard offer={offer} delay={idx * 0.05} />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
               <ArrowLeft className="w-4 h-4" />
             </Link>
           </div>
