@@ -897,40 +897,6 @@ const OfferCard = ({ offer, delay = 0, showActions = false, onStatusChange, onDe
             {offer.description}
           </p>
           
-          {/* Wanted Items */}
-          {offer.wanted_items && (
-            <div className="mb-4 p-2.5 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-100">
-              <p className="text-xs text-green-700 font-medium flex items-center gap-1">
-                <RefreshCw className="w-3 h-3" />
-                مطلوب: <span className="text-green-600 font-normal truncate">{offer.wanted_items}</span>
-              </p>
-            </div>
-          )}
-          
-          {/* Footer */}
-          <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-            <div className="flex items-center gap-2">
-              <Avatar className="w-8 h-8 border-2 border-purple-100 shadow-sm">
-                <AvatarFallback className="text-xs bg-gradient-to-br from-purple-500 to-pink-500 text-white font-bold">
-                  {(offer.user_name || offer.owner_name)?.charAt(0)}
-                </AvatarFallback>
-              </Avatar>
-              <div className="flex flex-col">
-                <span className="text-sm font-medium text-gray-800">{offer.user_name || offer.owner_name}</span>
-                {offer.user_trust_score > 0 && (
-                  <span className="text-[10px] text-amber-600 flex items-center gap-0.5">
-                    <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
-                    {offer.user_trust_score}
-                  </span>
-                )}
-              </div>
-            </div>
-            <span className="text-xs text-gray-400 flex items-center gap-1">
-              <Clock className="w-3 h-3" />
-              {timeAgo(offer.created_at)}
-            </span>
-          </div>
-
           {/* Actions for My Offers */}
           {showActions && (
             <div className="flex gap-2 mt-4 pt-3 border-t border-gray-100">
