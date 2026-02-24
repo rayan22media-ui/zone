@@ -3,6 +3,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
+from mysql_adapter import MySQLAdapter
 import os
 import logging
 from pathlib import Path
@@ -17,10 +18,15 @@ import base64
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+# Database connection (MongoDB الافتراضي أو MySQL متوافق مع Hostinger)
+DB_BACKEND = os.environ.get("DB_BACKEND", "mongodb").lower()
+if DB_BACKEND == "mysql":
+    client = MySQLAdapter()
+    db = client
+else:
+    mongo_url = os.environ['MONGO_URL']
+    client = AsyncIOMotorClient(mongo_url)
+    db = client[os.environ['DB_NAME']]
 
 # JWT Configuration
 SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
